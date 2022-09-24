@@ -1,0 +1,181 @@
+import turtle
+wn=turtle.Screen()
+wn.title("Car Racer")
+wn.setup(500,700)
+#wn.bgcolor("green")
+
+def game_start():
+    wn.addshape("C:/Users/Aadi/OneDrive/Desktop/road.gif")
+    wn.addshape("C:/Users/Aadi/OneDrive/Pictures/car_roofy.gif")
+    wn.addshape("C:/Users/Aadi/OneDrive/Desktop/enemy_car.gif")
+    wn.bgpic("C:/Users/Aadi/OneDrive/Desktop/road.gif")
+
+
+    def over_text():
+        text=turtle.Turtle()
+        text.penup()
+        text.speed(100)
+        text.sety(230)
+        text.hideturtle()
+        text.color("red")
+        text.write("GAMEOVER",align="center",font=("arial",30,"normal"))
+
+    score=0
+
+    def score_text():
+        text2=turtle.Turtle()
+        text2.penup()
+        text2.speed(100)
+        text2.goto(0,-50)
+        text2.hideturtle()
+        text2.color("red")
+        text2.write(f"Score:{score}",align="center",font=("arial",30,"normal"))
+
+
+    car=turtle.Turtle()
+    car.speed(100)
+    car.color("white")
+    car.penup()
+    car.shape("C:/Users/Aadi/OneDrive/Pictures/car_roofy.gif")
+
+    #car.shapesize(3)
+    car.left(90)
+    car.goto(0,-100)
+
+    ecar1=turtle.Turtle()
+    ecar1.speed(100)
+    ecar1.color("red")
+    ecar1.penup()
+    ecar1.shape("C:/Users/Aadi/OneDrive/Desktop/enemy_car.gif")
+    ecar1.shapesize(5,4)
+    ecar1.goto(170,800)
+    ecar1.dy=-30
+
+    ecar2=turtle.Turtle()
+    ecar2.speed(100)
+    ecar2.color("red")
+    ecar2.penup()
+    ecar2.shape("C:/Users/Aadi/OneDrive/Desktop/enemy_car.gif")
+    ecar2.shapesize(5,4)
+    ecar2.goto(-170,100)
+    ecar2.dy=-30
+
+    ecar3=turtle.Turtle()
+    ecar3.speed(100)
+    ecar3.color("red")
+    ecar3.penup()
+    ecar3.shape("C:/Users/Aadi/OneDrive/Desktop/enemy_car.gif")
+    ecar3.shapesize(5,4)
+    ecar3.goto(0,400)
+    ecar3.dy=-30
+
+
+    while True:
+        wn.update()
+        q=ecar1.ycor()+ecar1.dy
+        ecar1.sety(q)
+        w=ecar2.ycor()+ecar2.dy
+        ecar2.sety(w)
+        f=ecar3.ycor()+ecar3.dy
+        ecar3.sety(f)
+
+        
+        def over_text():
+            text=turtle.Turtle()
+            text.penup()
+            text.speed(100)
+            text.goto(0,200)
+            text.hideturtle()
+            text.color("red")
+            text.write("GAMEOVER",align="center",font=("arial",40,"normal"))
+        
+        def car_left():
+            z=car.xcor()-150
+            car.setx(z)
+        def car_right():
+            x=car.xcor()+150
+            car.setx(x)
+        wn.listen()
+        wn.onkeypress(car_left,"Left")
+        wn.onkeypress(car_right,"Right")
+        
+        
+        if car.xcor()>240:
+            car.hideturtle()
+            ecar1.hideturtle()
+            ecar2.hideturtle()
+            ecar3.hideturtle()
+            wn.bgcolor("white")
+            car.hideturtle()
+            over_text()
+            score_text()
+            text.hideturtle()
+            
+        if car.xcor()<-240:
+            car.hideturtle()
+            ecar1.hideturtle()
+            ecar2.hideturtle()
+            ecar3.hideturtle()
+            wn.bgcolor("white")
+            car.hideturtle()
+            over_text()
+            score_text()
+            text.hideturtle()
+        if ecar3.ycor()<-350:
+            score=score+1
+            ecar3.sety(600)
+        if ecar1.ycor()<-370:
+            ecar1.sety(1500)
+            score=score+1
+        if ecar2.ycor()<-350:
+            score=score+1
+            ecar2.sety(1200)
+        
+
+        if abs(ecar3.xcor()-car.xcor())<70 and abs(ecar3.ycor()-car.ycor())<100: 
+            car.hideturtle()
+            ecar1.hideturtle()
+            ecar2.hideturtle()
+            ecar3.hideturtle()
+            wn.bgcolor("white")
+            car.hideturtle()
+            over_text()
+            score_text()
+            text.hideturtle()
+
+        if abs(ecar1.xcor()-car.xcor())<70 and abs(ecar1.ycor()-car.ycor())<100: 
+            car.hideturtle()
+            ecar1.hideturtle()
+            ecar2.hideturtle()
+            ecar3.hideturtle()
+            wn.bgcolor("white")
+            car.hideturtle()
+            over_text()
+            score_text()
+            text.hideturtle() 
+
+        if abs(ecar2.xcor()-car.xcor())<70 and abs(ecar2.ycor()-car.ycor())<100: 
+            car.hideturtle()
+            ecar1.hideturtle()
+            ecar2.hideturtle()
+            ecar3.hideturtle()
+            wn.bgcolor("white")
+            car.hideturtle()
+            over_text()
+            score_text()
+            text.hideturtle()
+
+pr=turtle.Turtle()
+pr.speed(100)
+pr.color("black")
+pr.penup()
+pr.hideturtle()
+pr.goto(0,200)
+pr.write("PRESS 'SPACE' TO START",align="center",font=("arial",25,"normal"))
+wn.listen()
+wn.onkeypress(game_start,"space")         
+        
+turtle.done()
+
+
+
